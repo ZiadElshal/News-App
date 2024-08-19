@@ -7,6 +7,7 @@ class MyThemeData{
   static final ThemeData lightTheme = ThemeData(
     primaryColor: AppColors.primaryLightColor,
     appBarTheme: AppBarTheme(
+        iconTheme: IconThemeData(color: AppColors.whiteColor, size: 30),
         backgroundColor: AppColors.primaryLightColor,
         centerTitle: true,
         elevation: 0,
@@ -76,6 +77,12 @@ class MyThemeData{
           fontSize: 14,
           fontWeight: FontWeight.w500,
           color: AppColors.blackColor
+      ),
+      ///text on category item
+      bodyMedium: GoogleFonts.exo(
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+          color: AppColors.whiteColor
       ),
     )
   );

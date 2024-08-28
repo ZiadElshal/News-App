@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/app_colors.dart';
+import 'package:news_app/di/di.dart';
 import 'package:news_app/home/news/cubit/news_states.dart';
 import 'package:news_app/home/news/news_item.dart';
 import 'package:news_app/home/news/cubit/news_widget_view_model.dart';
@@ -18,7 +19,7 @@ class NewsWidget extends StatefulWidget {
 }
 
 class _NewsWidgetState extends State<NewsWidget> {
-  NewsWidgetViewModel newsWidgetViewModel = NewsWidgetViewModel();
+  NewsWidgetViewModel newsWidgetViewModel = getIt<NewsWidgetViewModel>();
 
   @override
   void initState() {

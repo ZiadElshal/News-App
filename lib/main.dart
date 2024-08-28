@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:news_app/di/di.dart';
 import 'package:news_app/home/home_screen.dart';
 import 'package:news_app/home/news/news_item_details_screen.dart';
 import 'package:news_app/my_bloc_observer.dart';
 import 'package:news_app/my_theme_data.dart';
 import 'package:news_app/providers/app_config_provider.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,13 +18,17 @@ void main() async{
   final String? savedLanguage = sharedPreferences.getString("appLanguage");
   final bool? theme = sharedPreferences.getBool("appTheme");
 
+  final documentDirectory = await getApplicationDocumentsDirectory();
+  Hive.init(documentDirectory.path);
+  configureDependencies();
+
   runApp(ChangeNotifierProvider(
       create: (context) => AppConfigProvider(
           appLanguage: savedLanguage ?? "en", mode: theme ?? false
       ),
       child: MyApp()));
   Bloc.observer = MyBlocObserver();
-  // runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {

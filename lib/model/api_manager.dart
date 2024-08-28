@@ -1,17 +1,30 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 import 'package:news_app/model/NewsResponse.dart';
 import 'package:news_app/model/SourceResponse.dart';
 import 'package:news_app/model/api_constants.dart';
 
 ///class to collect all methods of Api
+
+@singleton
 class ApiManager {
+
+  // ///private constructor
+  // ApiManager._();
+  //
+  // static ApiManager? _instance;  //may be => null or object
+  //
+  // static ApiManager getInstance(){
+  //   _instance ??= ApiManager._();
+  //   return _instance!;
+  // }
 /*
 https://newsapi.org/v2/top-headlines/sources?apiKey=45669a633b8c4d339dd864f9bc4458f0
 */
   ///func to get news sources
-  static Future<SourceResponse?> getSources(String categoryId) async {
+  Future<SourceResponse?> getSources(String categoryId) async {
     Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.sourceApiName,
         {
          'apiKey': ApiConstants.apiKey,
@@ -32,7 +45,7 @@ https://newsapi.org/v2/top-headlines/sources?apiKey=45669a633b8c4d339dd864f9bc44
 /*
 https://newsapi.org/v2/everything?q=bitcoin&apiKey=45669a633b8c4d339dd864f9bc4458f0
 */
-  static Future<NewsResponse?> getNewsBySourceId(String sourceID) async{
+  Future<NewsResponse?> getNewsBySourceId(String sourceID) async{
     Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.newsApiName,
     {
       'apiKey' : ApiConstants.apiKey,
